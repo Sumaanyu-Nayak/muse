@@ -94,6 +94,7 @@ If you have a LiDAR I strongly suggest using [KISS-ICP](https://github.com/PRBon
 ## :scroll: TODO list
 - [ ] Install KISS-ICP as a plugin library
 - [ ] Install camera odometry as a plugin library
+- [ ] Provide support for ROS2
 
 ## :hugs: Contributing
 
