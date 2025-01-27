@@ -22,14 +22,14 @@ To install the `muse_anymal_ros` package, follow these steps:
 
 1. Clone this repository to your ROS workspace:
     ```
-    $ git clone git@github.com:iit-DLSLab/MUSE.git
+    git clone git@github.com:iit-DLSLab/MUSE.git
     ```
 
 2. Build the package using `catkin_make`:
     ```
-    $ cd muse_ros/muse_ws
-    $ source devel/setup.bash
-    $ catkin_make -j$(proc) install
+    cd muse_ros/muse_ws
+    source devel/setup.bash
+    catkin_make -j$(proc) install
     ```
 
 ## :scroll: TODO list
