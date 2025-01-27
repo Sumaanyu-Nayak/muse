@@ -22,12 +22,12 @@ To install the `muse_anymal_ros` package, follow these steps:
 
 1. Clone this repository to your ROS workspace:
     ```
-    $ git clone git@github.com:ylenianistico/MUSE-dls_state_estimator.git
+    $ git clone git@github.com:iit-DLSLab/MUSE.git
     ```
 
 2. Build the package using `catkin_make`:
     ```
-    $ cd muse_anymal_ros/muse_ws
+    $ cd muse_ros/muse_ws
     $ source devel/setup.bash
     $ catkin_make -j$(proc) install
     ```
