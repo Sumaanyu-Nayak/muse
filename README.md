@@ -18,7 +18,7 @@ TODO list at the end of the page
 
 ## :hammer_and_wrench: Building
 
-To install the `muse_anymal_ros` package, follow these steps:
+To install the `muse_ros` package, follow these steps:
 
 1. Clone this repository to your ROS workspace:
     ```
