@@ -4,6 +4,8 @@ This repository contains the ROS package `muse_ros`, part of the MUSE (Multi-sen
 
 The `muse_ros` package provides a ROS node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
 
+The source code will be available after the paper's review process is finished.
+
 <h2 align="center"> :warning: REPOSITORY UNDER DEVELOPMENT :warning:
     
 The code will be available soon!
