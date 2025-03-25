@@ -111,6 +111,7 @@ add_library(${PROJECT_NAME}_plugins
 #   # src/plugins/feet_jacobians_plugin.cpp
 #   # src/plugins/slip_detection_plugin.cpp
   src/plugins/attitude_estimation_plugin.cpp
+  src/plugins/contact_detection_plugin.cpp
 #   src/plugins/sensor_fusion_plugin.cpp
 )
 
@@ -149,8 +150,12 @@ set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX ""
 message("${${PROJECT_NAME}_EXPORTED_TARGETS}")
   add_dependencies(${PROJECT_NAME}_node ${PROJECT_NAME}_generate_messages_cpp ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 
-  target_link_libraries(state_estimator_node
+target_link_libraries(state_estimator_node
   ${catkin_LIBRARIES}
+)
+
+target_link_libraries(${PROJECT_NAME}_plugins
+  ${catkin_LIBRARIES}  # <-- this includes message_filters now
 )
 
 ## Specify libraries to link a library or executable target against

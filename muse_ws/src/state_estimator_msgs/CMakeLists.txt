@@ -18,6 +18,7 @@ add_message_files(
 	FeetJacobians.msg
 	
 	attitude.msg
+	contact_detection.msg
 	leg_odometry.msg
 	sensor_fusion.msg
 	JointStateWithAcceleration.msg

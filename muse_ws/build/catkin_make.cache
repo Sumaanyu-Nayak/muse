@@ -1,2 +1,0 @@
-iit_commons:state_estimator:state_estimator_msgs
--DCATKIN_DEVEL_PREFIX=/root/muse_ws/devel -DCMAKE_INSTALL_PREFIX=/root/muse_ws/install -G Unix Makefiles

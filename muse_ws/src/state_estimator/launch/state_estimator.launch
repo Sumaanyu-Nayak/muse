@@ -9,6 +9,7 @@
 		<rosparam command="load" file="$(arg pluginlist_yaml)" />
 		<rosparam command="load" file="$(arg timeoutlist_yaml)"/>
 		<rosparam file="$(find state_estimator)/config/attitude_plugin.yaml" command="load" />
+		<rosparam file="$(find state_estimator)/config/contact_plugin.yaml" command="load" />
 
 		
 	</node>
