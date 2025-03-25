@@ -1,0 +1,8 @@
+prefix=/root/muse_ws/devel
+
+Name: state_estimator
+Description: Description of state_estimator
+Version: 0.0.1
+Cflags: -I/root/muse_ws/devel/include -I/root/muse_ws/src/state_estimator/include
+Libs: -L${prefix}/lib -lstate_estimator_commons -lstate_estimator_plugins -lstate_estimator_models
+Requires: pluginlib state_estimator_msgs roscpp iit_commons

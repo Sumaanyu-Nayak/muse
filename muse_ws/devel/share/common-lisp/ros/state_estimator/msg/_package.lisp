@@ -1,0 +1,17 @@
+(cl:defpackage state_estimator-msg
+  (:use )
+  (:export
+   "<CONTACTGAZEBO>"
+   "CONTACTGAZEBO"
+   "<CONTACTGAZEBO>"
+   "CONTACTGAZEBO"
+   "<ROLLPITCH>"
+   "ROLLPITCH"
+   "<ROLLPITCH>"
+   "ROLLPITCH"
+   "<ROLLPITCHSTAMPED>"
+   "ROLLPITCHSTAMPED"
+   "<ROLLPITCHSTAMPED>"
+   "ROLLPITCHSTAMPED"
+  ))
+

@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11  -rdynamic CMakeFiles/algebra-test.dir/src/algebra_test.cpp.o  -o /root/muse_ws/devel/lib/iit_commons/algebra-test   -L/root/muse_ws/build/gtest  -Wl,-rpath,/root/muse_ws/build/gtest:/root/muse_ws/build/gtest/lib ../gtest/lib/libgtest.so /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0 -lpthread -lpthread 
