@@ -61,6 +61,7 @@ ExactTimePolicy;
 		void initialize_() override {
 
             // Load parameters from YAML
+            // LF: left front leg, RF: right front leg, LH: left hind leg, RH: right hind leg
             std::string lf_topic, rf_topic, lh_topic, rh_topic, pub_topic;
             nh_.param("contact_detection_plugin/wrench_lf_topic", lf_topic, std::string("/state_estimator/contact_force_lf_foot"));
             nh_.param("contact_detection_plugin/wrench_rf_topic", rf_topic, std::string("/state_estimator/contact_force_rf_foot"));
