@@ -12,9 +12,9 @@
 	<description>A plugin to calculate leg odometry</description>
     </class>
 
-    <!-- <class name="SensorFusion" type="state_estimator_plugins::SensorFusionPlugin" base_class_type="state_estimator_plugins::PluginBase">
+    <class name="SensorFusion" type="state_estimator_plugins::SensorFusionPlugin" base_class_type="state_estimator_plugins::PluginBase">
         <description>A plugin to fuse the estimated attitude and the leg odometry</description>
-    </class> -->
+    </class>
 
 
 </library>

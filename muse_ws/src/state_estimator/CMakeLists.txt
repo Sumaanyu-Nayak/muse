@@ -118,7 +118,8 @@ add_library(${PROJECT_NAME}_plugins
     src/plugins/attitude_estimation_plugin.cpp
     src/plugins/contact_detection_plugin.cpp
     src/plugins/leg_odometry_plugin.cpp
-#   src/plugins/sensor_fusion_plugin.cpp
+    src/plugins/sensor_fusion_plugin.cpp
+    src/Models/sensor_fusion.cpp 
 )
 
 # add_library(${PROJECT_NAME}_models

@@ -37,47 +37,15 @@ public:
 
 	//xhatdot = f
 	//Pdot = FP+PF^T+Q
-	virtual void predict(T t, const Eigen::Matrix<T,N2,1> &u) override {
+	virtual void predict(T t, const Eigen::Matrix<T,N2,1> &u) override 
+	{
 
-		// T dt = t-this->t_prev;
-
-		// Eigen::Matrix<T,N1,1>	xdot =	calc_f(t,this->xhat,u);
-		// Eigen::Matrix<T,N4,N4>	F =	calc_F(t,this->xhat,u);
-		
-		// Eigen::Matrix<T,N4,N4> Pdot = F*P+P*F.transpose() + Q;
-
-		// this->xhat = this->xhat + xdot*dt;
-		// this->P = this->P + Pdot*dt;
-		// this->fixP();
-
-		// this->t_prev=t;
-
-        //ROS_ERROR_STREAM( "sei in predict");
-
-
-		
 	}
 
 	// K = PH'(HPH'+R)^-1
 	// xhat = xhat + K(z-h)
 	// P = (I-KH)P
 	virtual void update(T t, const Eigen::Matrix<T,N3,1> &z) override {
-// 		Eigen::Matrix<T,N5,N4>	H = calc_H(t,this->xhat);
-// 		Eigen::Matrix<T,N3,1>	h = calc_h(t,this->xhat);
-// 		Eigen::Matrix<T,N4,N5>	K = this->P*H.transpose()*(H*this->P*H.transpose()+this->R).inverse();
-// //        ROS_INFO_STREAM("sei in update x_hat prima di filtro "<<this->xhat);
-// //        ROS_INFO_STREAM("sei in update per z"<<z);
-
-// 		this->xhat = this->xhat + K*(z-h);
-//         //ROS_ERROR_STREAM( "sei in update x_hat dopo filtro "<< this->xhat);
-
-// 		this->P = (I-K*H)*this->P;
-// 		//this->P = (I-K*H)*this->P*(I-K*H).transpose()+K*R*K.transpose(); //Joseph form - Reduces numerical errors. For tested scenario difference was on the order of 10^-23
-// 		this->fixP();
-
-        //ROS_ERROR_STREAM( "sei in update");
-
-
 	}
 
 	virtual Eigen::Matrix<T,N1,1>	calc_f(T t, const Eigen::Matrix<T,N1,1> &x, const Eigen::Matrix<T,N2,1> &u)=0;

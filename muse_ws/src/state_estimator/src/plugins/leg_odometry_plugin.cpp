@@ -6,6 +6,8 @@
 #include <pinocchio/algorithm/jacobian.hpp>
 #include <pinocchio/algorithm/frames.hpp>
 
+#include <iit/commons/geometry/rotations.h>
+
 #include "state_estimator/plugin.hpp"
 #include <ros/ros.h>
 #include <ros/package.h>
@@ -13,6 +15,7 @@
 #include "state_estimator_msgs/LegOdometry.h"
 #include "state_estimator_msgs/JointStateWithAcceleration.h" 
 #include "state_estimator_msgs/ContactDetection.h"
+#include "state_estimator_msgs/attitude.h"
 #include <sensor_msgs/Imu.h>
 #include <geometry_msgs/WrenchStamped.h>
 
@@ -28,7 +31,8 @@ typedef message_filters::sync_policies::ApproximateTime
 <
 	sensor_msgs::Imu,
 	state_estimator_msgs::JointStateWithAcceleration,
-    state_estimator_msgs::ContactDetection
+    state_estimator_msgs::ContactDetection,
+    state_estimator_msgs::attitude
 > 
 ApproximateTimePolicy;
 
@@ -36,7 +40,8 @@ typedef message_filters::sync_policies::ExactTime
 <
 	sensor_msgs::Imu,
 	state_estimator_msgs::JointStateWithAcceleration,
-    state_estimator_msgs::ContactDetection
+    state_estimator_msgs::ContactDetection,
+    state_estimator_msgs::attitude
 > 
 ExactTimePolicy;
 
@@ -47,10 +52,10 @@ ExactTimePolicy;
 	{
 	public:
 		LegOdometryPlugin(): 
-			// lo_(nullptr), 
 			imu_sub_(nullptr), 
 			joint_state_sub_(nullptr), 
             contact_sub_(nullptr),
+            attitude_sub(nullptr),
 			pub_(nullptr), 
 			sync_(nullptr) 
 		{ } 
@@ -61,6 +66,7 @@ ExactTimePolicy;
 			if (imu_sub_!=nullptr) delete(imu_sub_);
 			if (joint_state_sub_!=nullptr) delete(joint_state_sub_);
             if (contact_sub_!=nullptr) delete(contact_sub_);
+            if (attitude_sub!=nullptr) delete(attitude_sub);
 			if (pub_!=nullptr) delete(pub_);
 			if (sync_!=nullptr) delete(sync_);
 		}
@@ -110,22 +116,25 @@ ExactTimePolicy;
                 base_R_imu_ = Eigen::Matrix3d::Identity();
             }
 
-            std::string imu_topic, joint_states_topic, contact_topic;
+            std::string imu_topic, joint_states_topic, contact_topic, attitude_topic, pub_topic;
             
             // Get topic names from the parameter server
             nh_.param("leg_odometry_plugin/imu_topic", imu_topic, std::string("/sensors/imu"));
             nh_.param("leg_odometry_plugin/joint_states_topic", joint_states_topic, std::string("/state_estimator/joint_states"));
             nh_.param("leg_odometry_plugin/contact_topic", contact_topic, std::string("/state_estimator/contact_detection"));
+            nh_.param("leg_odometry_plugin/attitude_topic", attitude_topic, std::string("/state_estimator/attitude"));
             
             // Set up subscribers using the loaded topic names
             imu_sub_ = new message_filters::Subscriber<sensor_msgs::Imu>(nh_, imu_topic, 250);
             joint_state_sub_ = new message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration>(nh_, joint_states_topic, 250);
             contact_sub_ = new message_filters::Subscriber<state_estimator_msgs::ContactDetection>(nh_, contact_topic, 250);
+            attitude_sub = new message_filters::Subscriber<state_estimator_msgs::attitude>(nh_, attitude_topic, 250);
 
-			sync_ = new message_filters::Synchronizer<MySyncPolicy>(MySyncPolicy(100),*imu_sub_,*joint_state_sub_,*contact_sub_); 
-  			sync_->registerCallback(boost::bind(&LegOdometryPlugin::callback, this, _1, _2, _3));
+			sync_ = new message_filters::Synchronizer<MySyncPolicy>(MySyncPolicy(100),*imu_sub_,*joint_state_sub_,*contact_sub_,*attitude_sub); 
+  			sync_->registerCallback(boost::bind(&LegOdometryPlugin::callback, this, _1, _2, _3,_4));
 
-			pub_ = new ros::Publisher(nh_.advertise<state_estimator_msgs::LegOdometry>("leg_odometry", 250));
+            nh_.param("leg_odometry_plugin/pub_topic", pub_topic, std::string("/state_estimator/leg_odometry"));
+            pub_ = new ros::Publisher(nh_.advertise<state_estimator_msgs::LegOdometry>(pub_topic, 250));
 
 		}
 
@@ -139,7 +148,8 @@ ExactTimePolicy;
 		(
 			const sensor_msgs::Imu::ConstPtr& imu,
 			const state_estimator_msgs::JointStateWithAcceleration::ConstPtr& js,
-            const state_estimator_msgs::ContactDetection::ConstPtr& contact
+            const state_estimator_msgs::ContactDetection::ConstPtr& contact,
+            const state_estimator_msgs::attitude::ConstPtr& attitude
 		)
 		{
 			// Robot joint states
@@ -159,7 +169,6 @@ ExactTimePolicy;
             	v[i] = js->velocity[i];
             
 			omega << imu->angular_velocity.x, imu->angular_velocity.y, imu->angular_velocity.z;
-            base_omega = base_R_imu_*omega;
             stance_lf = contact->stance_lf;
             stance_rf = contact->stance_rf;
             stance_lh = contact->stance_lh;
@@ -187,7 +196,7 @@ ExactTimePolicy;
                 Eigen::Vector3d omega_cross_r = omega_rotated.cross(foot_pos_base);
 
                 // Compute linear velocity of the foot relative to base
-                Eigen::Vector3d rel_vel = foot_vel_global.linear() - omega_cross_r;
+                Eigen::Vector3d rel_vel = -(foot_vel_global.linear() - omega_cross_r);
                 foot_vels.push_back(rel_vel);
             
             }
@@ -199,6 +208,13 @@ ExactTimePolicy;
 
             double sum_stance = stance_lf + stance_rf + stance_lh + stance_rh;
 			Eigen::Vector3d base_velocity = (stance_lf*lin_leg_lf + stance_rf*lin_leg_rf + stance_lh*lin_leg_lh + stance_rh*lin_leg_rh)/(sum_stance + 1e-5);
+
+            Eigen::Quaterniond quat_est;
+			quat_est.w() = attitude->quaternion[0];
+			quat_est.vec() << attitude->quaternion[1], attitude->quaternion[2], attitude->quaternion[3];
+			Eigen::Matrix3d w_R_b = iit::commons::quatToRotMat(quat_est).transpose();
+
+            base_velocity = w_R_b*base_velocity;
 
             // publishing	
 			msg_.header.stamp = ros::Time::now();
@@ -221,6 +237,7 @@ ExactTimePolicy;
 		message_filters::Subscriber<sensor_msgs::Imu> *imu_sub_;
 		message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration> *joint_state_sub_;
         message_filters::Subscriber<state_estimator_msgs::ContactDetection> *contact_sub_;
+        message_filters::Subscriber<state_estimator_msgs::attitude> *attitude_sub;
 		message_filters::Synchronizer<MySyncPolicy> *sync_;
 
 		ros::Publisher *pub_;

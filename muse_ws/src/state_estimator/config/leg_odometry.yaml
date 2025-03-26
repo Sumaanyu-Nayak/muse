@@ -5,4 +5,5 @@ leg_odometry_plugin:
   imu_topic: "/sensors/imu"
   joint_states_topic: "/state_estimator/joint_states"
   contact_topic: "/state_estimator/contact_detection"
-  urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
+  attitude_topic: "/state_estimator/attitude"
+  pub_topic: "leg_odometry"
