@@ -28,6 +28,9 @@ find_package(Eigen3 REQUIRED NO_MODULE)
 
 find_package(PkgConfig REQUIRED)
 
+find_package(pinocchio REQUIRED)
+
+
 ################################################
 ## Declare ROS messages, services and actions ##
 ################################################
@@ -98,20 +101,23 @@ include_directories(
   ${Eigen_INCLUDE_DIRS}
 )
 
+include_directories(${PINOCCHIO_INCLUDE_DIRS})
+
+
 ## Declare a C++ library
 add_library(${PROJECT_NAME}_plugins
 #   # src/plugins/constant_pose_plugin.cpp
 #   # src/plugins/feet_position_plugin.cpp
 #   # src/plugins/grf_plugin.cpp
-#   src/plugins/leg_odometry_plugin.cpp
 #   # src/plugins/simple_roll_pitch_plugin.cpp
 #   # src/plugins/stance_estimator_plugin.cpp
 #   src/plugins/timeout_plugin.cpp
 #   # src/plugins/forward_kinematics_plugin.cpp
 #   # src/plugins/feet_jacobians_plugin.cpp
 #   # src/plugins/slip_detection_plugin.cpp
-  src/plugins/attitude_estimation_plugin.cpp
-  src/plugins/contact_detection_plugin.cpp
+    src/plugins/attitude_estimation_plugin.cpp
+    src/plugins/contact_detection_plugin.cpp
+    src/plugins/leg_odometry_plugin.cpp
 #   src/plugins/sensor_fusion_plugin.cpp
 )
 
@@ -154,8 +160,13 @@ target_link_libraries(state_estimator_node
   ${catkin_LIBRARIES}
 )
 
+# target_link_libraries(state_estimator_node
+#   ${pinocchio_LIBRARIES}
+# )
+
 target_link_libraries(${PROJECT_NAME}_plugins
   ${catkin_LIBRARIES}  # <-- this includes message_filters now
+  ${PINOCCHIO_LIBRARIES}
 )
 
 ## Specify libraries to link a library or executable target against

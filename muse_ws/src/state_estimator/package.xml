@@ -19,6 +19,8 @@
   <depend>iit_commons</depend>
   <depend>message_generation</depend>
   <depend>state_estimator_msgs</depend>
+  <build_depend>pinocchio</build_depend>
+  <exec_depend>pinocchio</exec_depend>
 
   <export>
     <state_estimator plugin="${prefix}/state_estimator_plugins.xml" />

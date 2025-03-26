@@ -1,0 +1,8 @@
+leg_odometry_plugin:
+  plugin: "LegOdometryPlugin"
+  urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
+  
+  imu_topic: "/sensors/imu"
+  joint_states_topic: "/state_estimator/joint_states"
+  contact_topic: "/state_estimator/contact_detection"
+  urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"

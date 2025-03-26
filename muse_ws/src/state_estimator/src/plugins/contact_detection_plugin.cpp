@@ -1,7 +1,7 @@
 #include "state_estimator/plugin.hpp"
 #include <ros/ros.h>
 
-#include "state_estimator_msgs/contact_detection.h"
+#include "state_estimator_msgs/ContactDetection.h"
 #include <geometry_msgs/WrenchStamped.h>
 
 #include <message_filters/time_synchronizer.h>
@@ -83,7 +83,7 @@ ExactTimePolicy;
             sync_->registerCallback(boost::bind(&ContactDetectionPlugin::callback, this, _1, _2, _3, _4));
 
             // Publisher
-            pub_ = new ros::Publisher(nh_.advertise<state_estimator_msgs::contact_detection>(pub_topic, 250));
+            pub_ = new ros::Publisher(nh_.advertise<state_estimator_msgs::ContactDetection>(pub_topic, 250));
 
 		}
 
@@ -101,7 +101,7 @@ ExactTimePolicy;
 			const geometry_msgs::WrenchStamped::ConstPtr& wrench_rh
 		)
 		{
-
+			// Calculate the norm of the wrenches
             wrench_lf_norm = sqrt(pow(wrench_lf->wrench.force.x,2) + pow(wrench_lf->wrench.force.y,2) + pow(wrench_lf->wrench.force.z,2));
             wrench_rf_norm = sqrt(pow(wrench_rf->wrench.force.x,2) + pow(wrench_rf->wrench.force.y,2) + pow(wrench_rf->wrench.force.z,2));
             wrench_lh_norm = sqrt(pow(wrench_lh->wrench.force.x,2) + pow(wrench_lh->wrench.force.y,2) + pow(wrench_lh->wrench.force.z,2));
@@ -135,7 +135,7 @@ ExactTimePolicy;
 		message_filters::Synchronizer<MySyncPolicy> *sync_;
 		ros::Publisher *pub_;
 
-		state_estimator_msgs::contact_detection msg_;
+		state_estimator_msgs::ContactDetection msg_;
 
 		bool stance_lf;
 		bool stance_rf;
