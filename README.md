@@ -28,14 +28,14 @@ TODO list at the end of the page
 To install the `muse` package, follow these steps:
 
 1. Clone this repository and build the Docker image:
-    ```
+    ```sh
     git clone git@github.com:iit-DLSLab/MUSE.git
     cd muse
     docker build -t muse-docker .
     ```
 
 2. Enter the docker and build using `catkin_make`:
-    ```
+    ```sh
     cd muse_ws
     xhost +local:docker
     docker run -it --rm --name muse -v "$(pwd)":/root/muse_ws -w  /root/muse_ws muse-docker
@@ -43,16 +43,25 @@ To install the `muse` package, follow these steps:
     source devel/setup.bash  
     ```
 3. To launch the state estimator node:
-   ```
+   ```sh
    roslaunch state_estimator state_estimator.launch
    ```
 If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags, to make it visible inside the image, and then, you can attach a docker image in another terminal:
-```
-docker exec -it muse bash
+```sh
+docker run -it --rm --name muse -v /your_path_to_rosbags:/root/rosbags  -v "$(pwd)":/root/muse_ws -w /root/muse_ws muse-docker (terminal 1)
+docker exec -it muse bash (terminal 2)
+cd rosbag (terminal 2)
+rosbag play your_rosbag.bag (terminal 2)
 ```
 To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file) which is already installed in the docker image:
-```
+```sh
 rosrun plotjuggler plotjuggler
+```
+
+:warning: In this repo we provide an example with the ANYmal B300 robot. If you want to test MUSE with another one, you only need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and the name of the legs in the [leg odometry plugin, line 249](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp#L249):
+
+``` sh
+std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
 ```
 
 ## :scroll: TODO list
