@@ -23,7 +23,7 @@ TODO list at the end of the page
 
 ⚠️ Don't worry! In this repo, we provide **Dockerization** to avoid dealing with the dependencies!
 
-## :hammer_and_wrench: Building
+## :hammer_and_wrench: Building and Running
 
 To install the `muse` package, follow these steps:
 
