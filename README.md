@@ -53,6 +53,8 @@ docker exec -it muse bash (terminal 2)
 cd rosbag (terminal 2)
 rosbag play your_rosbag.bag (terminal 2)
 ```
+To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
+
 To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file) which is already installed in the docker image:
 ```sh
 rosrun plotjuggler plotjuggler
