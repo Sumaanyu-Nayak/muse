@@ -90,7 +90,7 @@ If you like this work and would like to cite it (thanks):
   keywords={Robots;Sensors;Robot sensing systems;Legged locomotion;Odometry;Cameras;Laser radar;Robot vision systems;Robot kinematics;Quadrupedal robots;state estimation;localization;sensor fusion;quadruped robots},
   doi={10.1109/LRA.2025.3553047}}
 ```
-
+This repo is maintained by [Ylenia Nisticò](https://github.com/ylenianistico)
 
 
 
