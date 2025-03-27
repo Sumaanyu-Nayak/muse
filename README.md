@@ -1,7 +1,7 @@
 <h1 align="center"> MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots </h1>
 <h3 align="center">Ylenia Nisticò, João Carlos Virgolino Soares, Lorenzo Amatucci, Geoff Fink and Claudio Semini</h3>	
 
-<h4 align="center">This paper has been accepted to IEEE Robotics and Automation Letter and it is available at https://arxiv.org/abs/2503.12101 
+<h4 align="center">This paper has been accepted to IEEE Robotics and Automation Letters and it is available at https://arxiv.org/abs/2503.12101 
 
 # :computer: Code
 
