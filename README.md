@@ -56,7 +56,7 @@ If you need to read the data from a rosbag, you need to mount the folder where y
 docker run -it --rm --name muse -v /your_path_to_rosbags:/root/rosbags  -v "$(pwd)":/root/muse_ws -w /root/muse_ws muse-docker (terminal 1)
 docker exec -it muse bash (terminal 2)
 source devel/setup.bash
-cd ~/rosbag (terminal 2)
+cd ~/rosbags (terminal 2)
 rosbag play your_rosbag.bag (terminal 2)
 ```
 To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
