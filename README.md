@@ -12,10 +12,13 @@
 
 The `muse` package provides a ROS node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
 
-This first version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are imu measurements, joint states, and the force exerted on the feet.
+This first version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are 
+- **imu measurements**
+- **joint states**
+- **force exerted on the feet**
 
     
-Additional code to fuse exteroceptive measurements code will be available soon!
+Additional code to fuse exteroceptive measurements will be available soon!
 TODO list at the end of the page
 </h2>
 
