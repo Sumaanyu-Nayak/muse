@@ -8,15 +8,6 @@ include_directories(include)
 add_message_files(
   DIRECTORY msg
   FILES
-	jointState.msg
-	actuatorForces.msg
-	imu.msg
-	timeSync.msg
-	rawSensors.msg
-    slip_detection.msg
-	ForwardKinematics.msg
-	FeetJacobians.msg
-	
 	attitude.msg
 	ContactDetection.msg
 	LegOdometry.msg

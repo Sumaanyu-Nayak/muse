@@ -1,9 +1,0 @@
-float64[3] foot_pos
-float64[9] foot_jac
-float64[3] gt_foot_pos
-float64[9] gt_foot_jac
-float64[3] foot_vel
-float64[3] gt_foot_vel
-float64[3] knee_pos
-float64[9] knee_jac
-float64[3] knee_vel
