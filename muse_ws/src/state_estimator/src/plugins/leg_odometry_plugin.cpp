@@ -247,6 +247,7 @@ ExactTimePolicy;
         pinocchio::Model model_;
         pinocchio::Data data_;
         std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
+        // std::vector<std::string> feet_frame_names = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};   // Aliengo robot
 
         bool model_loaded_{false};
 
