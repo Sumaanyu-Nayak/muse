@@ -3,7 +3,7 @@
   <name>state_estimator_msgs</name>
   <version>0.0.1</version>
   <description>State estimator msgs</description>
-  <maintainer email="geoff.fink@iit.it">Geoff Fink</maintainer>
+  <maintainer email="ylenia.nistico@iit.it">Geoff Fink</maintainer>
   <buildtool_depend>catkin</buildtool_depend>
   <license>GPLv3</license>
   <build_depend>message_generation</build_depend>
