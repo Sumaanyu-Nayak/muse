@@ -100,10 +100,10 @@ If you like this work and would like to cite it (thanks):
   journal={IEEE Robotics and Automation Letters}, 
   title={MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots}, 
   year={2025},
-  volume={},
-  number={},
-  pages={1-8},
-  keywords={Robots;Sensors;Robot sensing systems;Legged locomotion;Odometry;Cameras;Laser radar;Robot vision systems;Robot kinematics;Quadrupedal robots;state estimation;localization;sensor fusion;quadruped robots},
+  volume={10},
+  number={5},
+  pages={4620-4627},
+  keywords={Robots;Sensors;Robot sensing systems;Legged locomotion;Odometry;Cameras;Laser radar;Robot vision systems;Robot kinematics;Quadrupedal robots;State estimation;localization;sensor fusion;quadruped robots},
   doi={10.1109/LRA.2025.3553047}}
 ```
 This repo is maintained by [Ylenia Nisticò](https://github.com/ylenianistico)
