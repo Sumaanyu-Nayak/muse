@@ -54,7 +54,7 @@ To install the `muse` package, follow these steps:
    ```sh
    roslaunch state_estimator state_estimator.launch
    ```
-If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags, to make it visible inside the image, and then, you can attach a docker image in another terminal, for example:
+If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags (`your_path_to_rosbags`), to make it visible inside the image, and then, you can attach a docker image in another terminal, for example:
 ```sh
 docker run -it --rm --name muse \
   --net=host \
