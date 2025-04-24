@@ -81,7 +81,7 @@ rosrun plotjuggler plotjuggler
 ``` sh
 std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
 ```
-
+For real-world experiments, we recommend using this very nice [MPC](https://github.com/iit-DLSLab/Quadruped-PyMPC) to control your robot!
 ## :scroll: TODO list
 - [ ] Extend the code to include exteroception
 - [x] Dockerization
