@@ -37,7 +37,7 @@ To install the `muse` package, follow these steps:
 
 1. Clone this repository and build the Docker image:
     ```sh
-    git clone git@github.com:iit-DLSLab/MUSE.git
+    https://github.com/iit-DLSLab/muse.git
     cd muse
     docker build -t muse-docker .
     ```
