@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  ros-bridge:
+    build: .
+    container_name: ros1_ros2_bridge
+    network_mode: host
+    privileged: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_SOFTWARE=1
+    volumes:
+      # Mount your ROS 2 workspace
+      - ./muse_ros2/muse_ros2_ws:/root/ros2_ws:rw
+      # Mount X11 for GUI applications
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev:/dev:rw
+    stdin_open: true
+    tty: true
+    command: bash
+
+  # Separate service to run just the bridge
+  bridge-only:
+    build: .
+    container_name: ros_bridge_only  
+    network_mode: host
+    environment:
+      - ROS_MASTER_URI=http://localhost:11311
+      - ROS_DOMAIN_ID=0
+    volumes:
+      - ./muse_ros2/muse_ros2_ws:/root/ros2_ws:rw
+    stdin_open: true
+    tty: true
+    command: /root/start_bridge.sh

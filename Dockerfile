@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
     libglu1-mesa \
     freeglut3-dev \
+    net-tools\
     && rm -rf /var/lib/apt/lists/*
 
 ENV LIBGL_ALWAYS_SOFTWARE=1
@@ -60,4 +61,3 @@ ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 
 # default to bash
 CMD ["bash"]
-
